@@ -8,6 +8,8 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  APP_KEY: ${{ secrets.APP_KEY }}
+  APP_ENV: testing
 
 jobs:
   test:
@@ -26,12 +28,6 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Copy .env
-        run: cp .env.example .env
-
-      - name: Generate app key
-        run: php artisan key:generate
 
       - name: Run tests
         run: php artisan test
